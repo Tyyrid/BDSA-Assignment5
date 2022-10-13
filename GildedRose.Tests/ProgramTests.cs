@@ -8,6 +8,21 @@ public class ProgramTests
         true.Should().BeTrue();
     }
 
+    /*[Fact]
+    public void MainDoesSomethingAtAll(){
+        var writer = new StringWriter();
+        Console.SetOut(writer);
+
+        Program.Main(Array.Empty<String>());
+
+        var output = writer.ToString();
+        writer.Close();
+
+        output.Should().Contain("OMGHAI!");
+        output.Should().Contain("day 30");
+        output.Should().Contain("day 0");
+    }*/
+
     [Fact]
     public void Item_check_values() {
         var app = new Program() {
@@ -74,7 +89,7 @@ public class ProgramTests
         app.Items[0].Quality.Should().Be(18);
     }
 
-    [Fact (Skip="Not implemented yet")]
+    [Fact]
     public void UpdateQuality_Quality_is_never_above_50_ALLItem_except_SulfurasItem() {
         var app = new Program() {
                     Items = new List<Item> {
@@ -87,13 +102,13 @@ public class ProgramTests
 
         app.UpdateQuality();
 
-        app.Items[0].Quality.Should().Be(50);
-        app.Items[1].Quality.Should().Be(50);
-        app.Items[2].Quality.Should().Be(50);
-        app.Items[3].Quality.Should().Be(50);
+        app.Items[0].Quality.Should().BeLessThanOrEqualTo(50);
+        app.Items[1].Quality.Should().BeLessThanOrEqualTo(50);
+        app.Items[2].Quality.Should().BeLessThanOrEqualTo(50);
+        app.Items[3].Quality.Should().BeLessThanOrEqualTo(50);
     }
 
-    [Fact (Skip="Not implemented yet")]
+    [Fact]
     public void UpdateQuality_Quality_is_never_negative_StdItem() {
         var app = new Program() {
                     Items = new List<Item> {
@@ -135,7 +150,7 @@ public class ProgramTests
         app.Items[0].Quality.Should().Be(24);
     }
 
-    [Fact (Skip="Not implemented yet")]
+    [Fact]
     public void UpdateQuality_Quality_is_never_above_50_BrieItem() {
         var app = new Program() {
                     Items = new List<Item> {
@@ -150,7 +165,7 @@ public class ProgramTests
 
 
     /////  Sulfuras  /////
-    [Fact (Skip="Not implemented yet")]
+    [Fact]
     public void UpdateQuality_Quality_is_always_80_SulfurasItem() {
         var app = new Program() {
                     Items = new List<Item> {
@@ -230,20 +245,18 @@ public class ProgramTests
     }
 
 
+    /////  Conjured  /////
+    [Fact]
+    public void UpdateQuality_Quality_degrades_twice_as_fast_as_StdItem_ConjuredItem() {
+        var app = new Program() {
+                    Items = new List<Item> {
+                        new Item { Name = "Conjured Mana Cake", SellIn = 5, Quality = 25 }
+                                          }
+                                };
 
-    /*[Fact]
-    public void MainDoesSomethingAtAll(){
-        var writer = new StringWriter();
-        Console.SetOut(writer);
+        app.UpdateQuality();
 
-        Program.Main(Array.Empty<String>());
-
-        var output = writer.ToString();
-        writer.Close();
-
-        output.Should().Contain("OMGHAI!");
-        output.Should().Contain("day 30");
-        output.Should().Contain("day 0");
-    }*/
+        app.Items[0].Quality.Should().Be(23);
+    }
 
 }

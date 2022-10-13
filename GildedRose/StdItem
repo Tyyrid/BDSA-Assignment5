@@ -1,0 +1,20 @@
+namespace GildedRose;
+
+public class StdItem : Item, IQualities
+{
+    
+
+    public int decreaseQuality(int quality)
+    {
+        if(quality > 0) {
+            return quality - 1;
+        } else {
+            return quality;
+        }
+    }
+
+    public void decreaseSellIn(int sellIn, int quality)
+    {
+        throw new NotImplementedException();
+    }
+}

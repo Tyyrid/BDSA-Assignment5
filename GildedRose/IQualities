@@ -1,0 +1,8 @@
+namespace GildedRose;
+
+public interface IQualities {
+    public int decreaseQuality(int quality);
+
+    public void decreaseSellIn(int sellIn, int quality);
+
+}
